@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Johan George | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --ink: #0f0f0f;
+      --ink2: #2a2a2a;
+      --mid: #5a5a5a;
+      --muted: #8a8a8a;
+      --rule: #e2e2e2;
+      --bg: #f9f8f6;
+      --white: #ffffff;
+      --accent: #1a4f8b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+      z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 58px;
+    }
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem; color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* HERO */
+    .hero {
+      padding: 130px 3rem 80px;
+      max-width: 960px; margin: 0 auto;
+      border-bottom: 1px solid var(--rule);
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: inline-block;
+      width: 28px; height: 1px; background: var(--accent);
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 6vw, 4.4rem);
+      font-weight: 400; color: var(--ink);
+      line-height: 1.08; margin-bottom: 1.5rem;
+    }
+    .hero-bio {
+      font-size: 1.05rem; color: var(--mid);
+      max-width: 600px; line-height: 1.85;
+      margin-bottom: 2.25rem; font-weight: 300;
+    }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 0.6rem 1rem;
+      margin-bottom: 2rem; align-items: center;
+    }
+    .hero-meta span { font-size: 0.82rem; color: var(--mid); }
+    .hero-meta a { color: var(--mid); text-decoration: none; transition: color 0.15s; }
+    .hero-meta a:hover { color: var(--accent); }
+    .dot { color: var(--rule); }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      background: var(--bg); border: 1px solid var(--rule);
+      color: var(--mid); font-size: 0.75rem; padding: 0.28rem 0.8rem;
+      font-weight: 500; letter-spacing: 0.04em; border-radius: 2px;
+    }
+
+    /* LAYOUT */
+    .page-inner { max-width: 960px; margin: 0 auto; padding: 0 3rem; }
+    .section { padding: 68px 0; border-bottom: 1px solid var(--rule); }
+    .section-head { margin-bottom: 2.5rem; }
+    .section-eyebrow {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent);
+      display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;
+    }
+    .section-eyebrow::before {
+      content: ''; display: inline-block;
+      width: 20px; height: 1px; background: var(--accent);
+    }
+    .section-head h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem; color: var(--ink); font-weight: 400;
+    }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 255px; gap: 4rem; align-items: start; }
+    .about-text p { color: var(--ink2); line-height: 1.9; margin-bottom: 1.1rem; font-weight: 300; font-size: 0.97rem; }
+    .facts-box { border: 1px solid var(--rule); overflow: hidden; }
+    .fact-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 0.65rem 1rem; border-bottom: 1px solid var(--rule); font-size: 0.81rem;
+    }
+    .fact-row:last-child { border-bottom: none; }
+    .fact-k { font-weight: 600; color: var(--ink); }
+    .fact-v { color: var(--muted); text-align: right; font-weight: 400; font-size: 0.78rem; max-width: 130px; }
+
+    /* RESUME */
+    .resume-section { background: var(--bg); }
+    .resume-section .section { border-bottom: none; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      background: var(--accent); color: #fff;
+      padding: 0.6rem 1.4rem; font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      text-decoration: none; border-radius: 2px;
+      transition: background 0.15s; margin-bottom: 1.5rem;
+    }
+    .btn-primary:hover { background: #163f73; }
+    .resume-wrap {
+      width: 100%; background: #fff;
+      border: 1px solid var(--rule);
+    }
+    .resume-embed {
+      width: 100%; height: 860px;
+      display: block; border: none;
+    }
+
+    /* PROJECTS */
+    .course-block { margin-bottom: 3.5rem; }
+    .course-block:last-child { margin-bottom: 0; }
+    .course-title {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.6rem; margin-bottom: 1.5rem;
+    }
+    .projects-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .proj-card {
+      border: 1px solid var(--rule);
+      transition: box-shadow 0.2s, transform 0.2s;
+      background: var(--white);
+    }
+    .proj-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.08); transform: translateY(-2px); }
+    .proj-img-wrap {
+      width: 100%; height: 200px; overflow: hidden;
+      border-bottom: 1px solid var(--rule); background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .proj-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .proj-img.contain { object-fit: contain; padding: 1.25rem; }
+    .proj-body { padding: 1.4rem; }
+    .proj-course {
+      font-size: 0.67rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
+    }
+    .proj-body h3 { font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 0.25rem; line-height: 1.35; }
+    .proj-meta { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.85rem; }
+    .proj-desc { font-size: 0.87rem; color: var(--mid); line-height: 1.8; font-weight: 300; }
+
+    /* CAREER */
+    .career-text p { color: var(--ink2); line-height: 1.9; margin-bottom: 1.2rem; font-weight: 300; font-size: 0.97rem; }
+    .speaker-block { border: 1px solid var(--rule); margin-top: 2.5rem; overflow: hidden; }
+    .speaker-layout { display: grid; grid-template-columns: 1fr; }
+    .speaker-img-banner {
+      width: 100%; max-height: 340px; overflow: hidden;
+      border-bottom: 1px solid var(--rule);
+      display: flex; align-items: flex-start; justify-content: center;
+      background: #f0f0ee;
+    }
+    .speaker-img {
+      width: 100%; height: auto; display: block;
+      object-fit: cover; object-position: center top;
+    }
+    .speaker-meta-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 1.6rem; border-bottom: 1px solid var(--rule);
+      background: var(--bg); gap: 1rem; flex-wrap: wrap;
+    }
+    .speaker-tag {
+      font-size: 0.67rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--accent);
+    }
+    .speaker-name-role h4 { font-size: 1rem; font-weight: 600; color: var(--ink); }
+    .speaker-name-role p { font-size: 0.8rem; color: var(--muted); }
+    .speaker-content { padding: 1.6rem; }
+    .speaker-content p { font-size: 0.87rem; color: var(--mid); line-height: 1.85; font-weight: 300; margin-bottom: 0.9rem; }
+    .speaker-content p:last-child { margin-bottom: 0; }
+
+    /* FOOTER */
+    footer { background: var(--ink); color: var(--white); padding: 4rem 3rem; }
+    .footer-inner { max-width: 960px; margin: 0 auto; }
+    .footer-brand h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem; font-weight: 400; margin-bottom: 0.3rem;
+    }
+    .footer-sub { font-size: 0.83rem; color: rgba(255,255,255,0.38); font-weight: 300; margin-bottom: 2.5rem; }
+    .contact-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border: 1px solid rgba(255,255,255,0.1); overflow: hidden;
+    }
+    .c-item { padding: 1.1rem 1.3rem; border-right: 1px solid rgba(255,255,255,0.1); }
+    .c-item:last-child { border-right: none; }
+    .c-label { font-size: 0.64rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 0.35rem; }
+    .c-val { font-size: 0.82rem; color: rgba(255,255,255,0.75); }
+    .c-val a { color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.15s; }
+    .c-val a:hover { color: #fff; text-decoration: underline; }
+    .footer-bottom { margin-top: 2.25rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.74rem; color: rgba(255,255,255,0.2); }
+
+    @media (max-width: 720px) {
+      .hero, .page-inner { padding-left: 1.5rem; padding-right: 1.5rem; }
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .projects-row { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr 1fr; }
+      footer { padding: 3rem 1.5rem; }
+      .resume-section .section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-name">Johan George</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#career">Career</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">Dublin High School &mdash; Engineering Portfolio</p>
+  <h1>Johan George</h1>
+  <p class="hero-bio">
+    Computer science student with a focus on cybersecurity, data, and building technology that solves real problems. Incoming student at the University of Illinois Urbana&#8209;Champaign, studying Engineering.
+  </p>
+  <div class="hero-meta">
+    <span>Dublin, CA</span>
+    <span class="dot">&middot;</span>
+    <span><a href="mailto:johangeorge094@gmail.com">johangeorge094@gmail.com</a></span>
+    <span class="dot">&middot;</span>
+    <span><a href="tel:9254876190">(925) 487-6190</a></span>
+    <span class="dot">&middot;</span>
+    <span><a href="http://www.linkedin.com/in/johangeorge101" target="_blank">LinkedIn &#8599;</a></span>
+  </div>
+  <div class="tag-row">
+    <span class="tag">Python</span>
+    <span class="tag">JavaScript / React</span>
+    <span class="tag">Cybersecurity</span>
+    <span class="tag">Data Analysis</span>
+    <span class="tag">Sports &amp; Tech</span>
+    <span class="tag">Entrepreneurship</span>
+  </div>
+</div>
+
+<div class="page-inner">
+
+<section class="section" id="about">
+  <div class="section-head">
+    <p class="section-eyebrow">Background</p>
+    <h2>About Me</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I am a senior at Dublin High School with a strong focus on computer science, cybersecurity, and data. From the moment I started writing code I became interested in one question: how can software solve real problems for real people? Whether it is building a website that helps hundreds of students navigate STEM programs, developing an inventory system adopted in a real office, or designing a network security architecture from the ground up, I approach every project with that question in mind.</p>
+      <p>My coursework includes AP Calculus AB, AP Environmental Sciences, AP Seminar, AP Computer Science A, AP Computer Science Principles, AP Macroeconomics, and AP Government, alongside Honors Chemistry and Honors Physics. I have completed dual-enrollment courses at Las Positas College, Saddleback College, and Foothill College, and contributed study guides now used by over 2,400 students through APStudy. As General Manager and Web Developer at Eureka Institute I built the organization's full website and helped organize a hackathon that raised $40K and engaged 300+ students.</p>
+      <p>This fall I will attend the University of Illinois Urbana-Champaign to study Engineering. My long-term goal is to work at a company like Apple or build my own startup at the intersection of sports and technology. I believe the most impactful products are built by people who understand both the logic of systems and the human needs those systems serve.</p>
+    </div>
+    <div>
+      <div class="facts-box">
+        <div class="fact-row"><span class="fact-k">School</span><span class="fact-v">Dublin High School</span></div>
+        <div class="fact-row"><span class="fact-k">Graduating</span><span class="fact-v">June 2026</span></div>
+        <div class="fact-row"><span class="fact-k">College</span><span class="fact-v">UIUC &mdash; Engineering</span></div>
+        <div class="fact-row"><span class="fact-k">SAT</span><span class="fact-v">1540</span></div>
+        <div class="fact-row"><span class="fact-k">AP Calculus AB</span><span class="fact-v">Score: 5</span></div>
+        <div class="fact-row"><span class="fact-k">Award</span><span class="fact-v">4th Place, Young Coders</span></div>
+        <div class="fact-row"><span class="fact-k">Dual Enrollment</span><span class="fact-v">Las Positas, Saddleback &amp; Foothill College</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="resume-section" id="resume">
+  <div class="page-inner">
+    <section class="section">
+      <div class="section-head">
+        <p class="section-eyebrow">Professional</p>
+        <h2>Resume</h2>
+      </div>
+      <a href="resume.pdf" target="_blank" class="btn-primary">&#8599;&nbsp; Open Full PDF</a>
+      <div class="resume-wrap">
+        <iframe src="resume.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" class="resume-embed" title="Johan George Resume"></iframe>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="page-inner">
+
+<section class="section" id="projects">
+  <div class="section-head">
+    <p class="section-eyebrow">Coursework</p>
+    <h2>Projects</h2>
+  </div>
+
+  <div class="course-block">
+    <p class="course-title">Computer Science Essentials</p>
+    <div class="projects-row">
+      <div class="proj-card">
+        <div class="proj-img-wrap">
+          <img src="mapitdriveit.png" alt="Map It Drive It" class="proj-img contain" />
+        </div>
+        <div class="proj-body">
+          <p class="proj-course">CSE</p>
+          <h3>Map It Drive It</h3>
+          <p class="proj-meta">February 2023 &middot; Johan George &amp; Karthik Arun</p>
+          <p class="proj-desc">Programmed a robot to navigate a 9-grid map using loops and two-dimensional lists. I was responsible for grids 2, 3, 7, and 9, writing precise navigation instructions for each path. The core challenge was learning how loop-based commands drive a robot through a grid without overstepping boundaries. My partner and I divided work clearly and completed all paths on time, deepening my understanding of iteration and 2D list logic.</p>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-img-wrap">
+          <img src="blockcoding.png" alt="1.2.1 Problem Solving Interview Database" class="proj-img contain" />
+        </div>
+        <div class="proj-body">
+          <p class="proj-course">CSE</p>
+          <h3>1.2.1 &mdash; Problem-Solving Interview Database</h3>
+          <p class="proj-meta">November 2022 &middot; Johan George &amp; Jacob Chun</p>
+          <p class="proj-desc">Built an MIT App Inventor application that presents a structured sequence of survey questions to users and collects their responses. Our topic was chewing gum in class. I took a leadership role, programming the list-based question flow and user interaction using block-based code. I learned how to build functional mobile-app logic using string lists and sequential event handling in a block-based environment.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="course-block">
+    <p class="course-title">AP Computer Science Principles</p>
+    <div class="projects-row">
+      <div class="proj-card">
+        <div class="proj-img-wrap">
+          <img src="hangman.png" alt="Hangman Project" class="proj-img" />
+        </div>
+        <div class="proj-body">
+          <p class="proj-course">AP CSP</p>
+          <h3>Hangman &mdash; Basketball &amp; NFL Edition</h3>
+          <p class="proj-meta">December 2023 &middot; Johan George &amp; Shrihan Lakinana</p>
+          <p class="proj-desc">Built a sports-themed Hangman game in Scratch where players guess basketball and NFL terms within a limited number of tries. I served as the driver, writing all core logic, while my partner navigated. I learned to manage list manipulation and build efficient user-input loops. The biggest challenge was debugging edge cases in the guessing logic, which we resolved by breaking the program into smaller, testable functions and communicating clearly throughout.</p>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-img-wrap">
+          <img src="halloween.png" alt="1.1.9 Algorithms and Art" class="proj-img" />
+        </div>
+        <div class="proj-body">
+          <p class="proj-course">AP CSP</p>
+          <h3>1.1.9 &mdash; Algorithms and Art</h3>
+          <p class="proj-meta">August 2023 &middot; Johan George &amp; Yonit Gupta</p>
+          <p class="proj-desc">Created a Halloween-themed interactive school scene using Python functions and lists. The program accepted user input to generate animated scenes of DHS featuring ghosts, sound effects, and a working door. As driver, I implemented every function and met all requirements while my partner navigated. I learned how algorithms produce visual, user-driven outputs and how to structure modular, readable functions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="course-block">
+    <p class="course-title">Cybersecurity</p>
+    <div class="projects-row">
+      <div class="proj-card">
+        <div class="proj-img-wrap">
+          <img src="cybersec1.png" alt="2.2.4 Secure the Server" class="proj-img" />
+        </div>
+        <div class="proj-body">
+          <p class="proj-course">Cybersecurity</p>
+          <h3>2.2.4 &mdash; Secure the Server</h3>
+          <p class="proj-meta">2025 &middot; Johan George</p>
+          <p class="proj-desc">Identified and remediated two live server vulnerabilities in a simulated environment. I located an unnecessary SMTP mail service, researched its risks using the National Vulnerability Database, then disabled the SMTP Virtual Server in IIS 6.0 Manager to block unauthorized email transmission. I also reconfigured server error pages from verbose responses that exposed file paths to generic custom pages. Both fixes were documented and validated through live testing, applying the principle of least privilege throughout.</p>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-img-wrap">
+          <img src="cybersec2.png" alt="2.1.3 E-Commerce Architecture" class="proj-img contain" />
+        </div>
+        <div class="proj-body">
+          <p class="proj-course">Cybersecurity</p>
+          <h3>2.1.3 &mdash; E-Commerce Site Security Architecture</h3>
+          <p class="proj-meta">2025 &middot; Johan George</p>
+          <p class="proj-desc">Designed a full network topology for a fictional e-commerce company ("Bikes, Boards, and Beyond"), mapping public-facing web servers, internal routers, product databases, and ad servers. I determined which data categories required the highest confidentiality, integrity, and availability, then compared my design against an Amazon-style reference architecture. Key takeaways: separate public and internal servers, restrict sensitive data to authorized users, and encrypt all internal traffic.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="section" id="career">
+  <div class="section-head">
+    <p class="section-eyebrow">Exploration</p>
+    <h2>Career Exploration</h2>
+  </div>
+  <div class="career-text">
+    <p>During my time in high school, I have explored careers in technology and entrepreneurship through research, volunteer work, paid employment, and guest speaker events. My interest in computer science has been shaped not only by coursework but by real experiences that showed me what it looks like to build something meaningful with technology and to understand the people that technology is meant to serve.</p>
+    <p>My career research has consistently pointed me toward the intersection of data, systems, and human impact. Through the CA Colleges Interest Profiler and engineering career research in class, I identified that I am most drawn to roles like software engineer, data analyst, and product developer. These findings shaped my decision to pursue Engineering at UIUC and to complete dual enrollment coursework at Las Positas College, Saddleback College, and Foothill College ahead of schedule. Studying how statistical models and algorithms work together reinforced my goal of using data science to solve problems in sports, public health, and business.</p>
+    <p>My professional experiences have given me broad exposure across several fields. At Eureka Institute I served as General Manager and Web Developer, building the organization's full website in React, TypeScript, and Tailwind CSS, and co-organizing a hackathon that raised $40K and engaged 300+ students. At Bristol Hospice I contributed 60+ volunteer hours in administration, authored the internal newsletter, and conducted research analyzing hospice utilization data across California counties, presenting findings directly to leadership. I have also tutored students at Yang Fan Academy, worked as a cashier at Charleys Philly Steaks, and served as Media Intern at Mar Thoma Church, leading a team that grew weekly online viewership to 150+. Each experience reinforced that strong systems, clear communication, and consistency matter in every field.</p>
+  </div>
+
+  <div class="speaker-block">
+    <div class="speaker-layout">
+      <div class="speaker-img-banner">
+        <img src="brian_ng.png" alt="Brian Ng" class="speaker-img" />
+      </div>
+      <div class="speaker-meta-row">
+        <div class="speaker-name-role">
+          <h4>Brian Ng</h4>
+          <p>Transformational Marketing Executive &nbsp;&middot;&nbsp; FIVE Brand Strategy</p>
+        </div>
+        <span class="speaker-tag">Guest Speaker &mdash; 2025/2026 School Year</span>
+      </div>
+      <div class="speaker-content">
+        <p>Brian Ng delivered a session on omni-channel excellence as the foundation of modern business growth. He argued that a brand's success depends on treating the entire customer journey as one cohesive ecosystem rather than a series of isolated transactions. His central point was that data-driven decisions provide direction, but it is the intersection of creativity and strategy that transforms a business into a lasting legacy. He introduced the idea that true consumer-centric innovation starts with solving deep-seated human problems, and that reliability and strong unit economics follow naturally when that foundation is right.</p>
+        <p>What resonated most was his advice to "iterate like you're right but listen like you're wrong." He pushed us to become multilingual professionals — people who can move between a complex data model and a creative brand strategy session with equal confidence. He emphasized that technical proficiency means very little without a narrative that makes data compelling to a wider audience. His talk changed how I approach presenting my work: the best builders communicate the why alongside the how, and that shift has stayed with me since.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer id="contact">
+  <div class="footer-inner">
+    <h2>Johan George</h2>
+    <p class="footer-sub">Open to opportunities, collaborations, and conversations.</p>
+    <div class="contact-grid">
+      <div class="c-item">
+        <p class="c-label">Location</p>
+        <p class="c-val">Dublin, California</p>
+      </div>
+      <div class="c-item">
+        <p class="c-label">Email</p>
+        <p class="c-val"><a href="mailto:johangeorge094@gmail.com">johangeorge094@gmail.com</a></p>
+      </div>
+      <div class="c-item">
+        <p class="c-label">Phone</p>
+        <p class="c-val"><a href="tel:9254876190">(925) 487-6190</a></p>
+      </div>
+      <div class="c-item">
+        <p class="c-label">LinkedIn</p>
+        <p class="c-val"><a href="http://www.linkedin.com/in/johangeorge101" target="_blank">johangeorge101 &#8599;</a></p>
+      </div>
+    </div>
+    <p class="footer-bottom">&copy; 2026 Johan George &nbsp;&middot;&nbsp; Dublin High School Engineering Portfolio</p>
+  </div>
+</footer>
+
+</body>
+</html>
